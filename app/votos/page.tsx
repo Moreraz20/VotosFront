@@ -14,12 +14,12 @@ type Voto = {
 const Votos = () => {
   const [VotosList, setVotosList] = useState<Voto[]>([]);
 
-  
   const fetchVotes = () => {
     axios
       .get("http://localhost:3000/votos/get/all")
       .then((response) => {
         setVotosList(response.data); // Almacena los datos en el estado
+        console.log(VotosList);
       })
       .catch((error) => {
         console.log(error);
@@ -33,35 +33,47 @@ const Votos = () => {
   return (
     <main>
       <div>
-        <p>Hola esto es Votos</p>
-      </div>
-      
-      <div>
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Candidato
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Partido
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {VotosList.map((voto) => (
-              <tr key={voto._id}>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  console.log(voto.infoCandidato.nombre)
-                  {voto.infoCandidato.nombre}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {voto.infoPartido.nombre}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {VotosList.length > 0 ? (
+          <div> 
+            <div className="relative overflow-x-auto">
+              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                  <tr>
+                    <th scope="col" className="px-6 py-3">
+                      Voto #
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Id
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Candidato
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Partido
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {VotosList.map((voto, index) => (
+                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    > 
+                      {index}
+                    </th>
+                    <td className="px-6 py-4">{voto._id}</td>
+                    <td className="px-6 py-4">{voto.infoCandidato.nombre}</td>
+                    <td className="px-6 py-4">{voto.infoPartido.nombre}</td>
+                  </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ) : (
+          <p>Cargando</p>
+        )}
       </div>
     </main>
   );
