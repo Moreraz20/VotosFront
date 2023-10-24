@@ -5,6 +5,11 @@ Andrés Felipe Morera Díaz
 Prueba número: tenologo-06
 
 
+## Video de funcionamiento:
+
+https://drive.google.com/file/d/1yxOT6a4QatuMnUsnaCA7woVDxiyGYqhn/view?usp=sharing
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
